@@ -1,3 +1,14 @@
+## Create project NodeJs
+npm init -y
+
+## Include npm package Server Json
+ npm i --save json-server@0.13.0 -E
+
+
+## Create file ".json"
+
+
+
 ## Available Scripts
 
 In the project directory, you can run:
