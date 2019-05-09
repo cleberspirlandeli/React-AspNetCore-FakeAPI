@@ -1,0 +1,15 @@
+Criar app node  --> npm init -y
+Add package     --> npm i --save json-server@0.13.0 -E
+criar arquivo "nome.json"
+
+Rodar o App: 
+json-server --watch dbcliente.json --port 3001
+ou
+alterar package.json
+  "scripts": {
+    "start": "json-server --watch dbcliente.json --port 3001"
+  }
+npm start
+
+GET - http://localhost:3001/clientes
+GET - http://localhost:3001/pedidos

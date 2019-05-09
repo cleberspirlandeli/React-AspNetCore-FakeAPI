@@ -1,0 +1,20 @@
+{
+    "clientesid": [
+        {
+            "id": 1,
+            "nome": "Haos Greagnear",
+            "dataNascimento": "01/01/1991",
+            "sexo": "M",
+            "email": "Haos-teste@gmail.com",
+            "telefone": "16999990001",
+            "whatsapp": true,
+            "cep":"14060769",
+            "rua": "Praça Francisco de Assis",
+            "bairro": "Presidente Dutra",
+            "numero": "1500",
+            "cidade": "Ribeirão Preto",
+            "estado": "SP",
+            "complemento": "Ap001"
+        }   
+    ]
+}

@@ -1,0 +1,102 @@
+{
+    "clientes": [
+        {
+            "id": 1,
+            "nome": "Haos Greagnear",
+            "dataNascimento": "01/01/1991",
+            "sexo": "M",
+            "email": "Haos-teste@gmail.com",
+            "telefone": "16999990001",
+            "whatsapp": true,
+            "cep":"14060769",
+            "rua": "Praça Francisco de Assis",
+            "bairro": "Presidente Dutra",
+            "numero": "1500",
+            "cidade": "Ribeirão Preto",
+            "estado": "SP",
+            "complemento": "Ap001"
+        },
+        {
+            "id": 2,
+            "nome": "Lonundeu Urnioxiu",
+            "dataNascimento": "01/01/1992",
+            "sexo": "M",
+            "email": "Lonundeu-teste@gmail.com",
+            "telefone": "16999990002",
+            "whatsapp": false,
+            "cep":"14080119",
+            "rua": "Travessa Ângela",
+            "bairro": "Campos Elíseos",
+            "numero": "123",
+            "cidade": "Ribeirão Preto",
+            "estado": "SP",
+            "complemento": ""
+        },
+        {
+            "id": 3,
+            "nome": "Koavosa Zeciuga",
+            "dataNascimento": "01/01/1993",
+            "sexo": "F",
+            "email": "Koavosa-teste@gmail.com",
+            "telefone": "16999990003",
+            "whatsapp": true,
+            "cep":"14056040",
+            "rua": "Rua Deolinda Carvalho Bim",
+            "bairro": "Planalto Verde",
+            "numero": "565",
+            "cidade": "Ribeirão Preto",
+            "estado": "SP",
+            "complemento": "Fundo"
+        },
+        {
+            "id": 4,
+            "nome": "Siogozu Benu",
+            "dataNascimento": "01/01/1994",
+            "sexo": "F",
+            "email": "Siogozu-teste@gmail.com",
+            "telefone": "16999990004",
+            "whatsapp": true,
+            "cep":"14031420",
+            "rua": "Rua Dante Senno",
+            "bairro": "Parque Ribeirão Preto",
+            "numero": "89-A",
+            "cidade": "Franca",
+            "estado": "SP",
+            "complemento": "Arvore na porta"
+        },        
+        {
+            "id": 5,
+            "nome": "Xion Rayreyes",
+            "dataNascimento": "01/01/1995",
+            "sexo": "F",
+            "email": "Xion-teste@gmail.com",
+            "telefone": "16999990005",
+            "whatsapp": true,
+            "cep":"14095560",
+            "rua": "Rua Raul de Faria",
+            "bairro": "Parque Anhanguera",
+            "numero": "789",
+            "cidade": "Rio De Janeiro",
+            "estado": "RJ",
+            "complemento": "Ao lado da farmacia"
+        }
+    ],
+    "clientesid": [
+        {
+            "id": 1,
+            "nome": "Haos Greagnear",
+            "dataNascimento": "01/01/1991",
+            "sexo": "M",
+            "email": "Haos-teste@gmail.com",
+            "telefone": "16999990001",
+            "whatsapp": true,
+            "cep":"14060769",
+            "rua": "Praça Francisco de Assis",
+            "bairro": "Presidente Dutra",
+            "numero": "1500",
+            "cidade": "Ribeirão Preto",
+            "estado": "SP",
+            "complemento": "Ap001"
+        }   
+    ]
+}
