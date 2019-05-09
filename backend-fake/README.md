@@ -1,8 +1,3 @@
-Criar app node  --> npm init -y
-Add package     --> npm i --save json-server@0.13.0 -E
-criar arquivo "nome.json"
-
-
 ## Available Scripts
 
 In the project directory, you can run:
