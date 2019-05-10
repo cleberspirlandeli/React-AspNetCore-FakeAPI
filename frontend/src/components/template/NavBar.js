@@ -1,5 +1,5 @@
 import React from 'react'
-// <nav className="navbar navbar-expand-lg navbar-light bg-light">
+import { Router, Link } from 'react-router-dom'
 
 export default props =>
     <div>
@@ -12,17 +12,15 @@ export default props =>
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
-
                         <li className="nav-item active">
-                            <a className="nav-link" href="#">Pedidos <span className="badge badge-light text-white bg-danger">4</span></a>
+                            <a className="nav-link" href="/pedidos">Pedidos <span className="badge badge-light text-white bg-danger">4</span></a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/clientes">Clientes</a>
                         </li>
 
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Clientes</a>
-                        </li>
-
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">Marketing</a>
+                            <a className="nav-link" href="/marketing">Marketing</a>
                         </li>
                     </ul>
                     <form className="form-inline my-2 my-lg-0">

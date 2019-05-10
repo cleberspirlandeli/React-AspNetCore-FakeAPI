@@ -19,13 +19,15 @@ export default class Cliente extends Component {
             cep: '',
             rua: '',
             bairro: '',
+            idPrepareToDelete: null,
             clientes: []
         }
 
         this.getClientes = this.getClientes.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.handleClickEdit = this.handleClickEdit.bind(this)
-        this.handleClickRemove= this.handleClickRemove.bind(this)
+        this.handleClickConfirmRemove= this.handleClickConfirmRemove.bind(this)
+        this.handleClickPrepareToDelete = this.handleClickPrepareToDelete.bind(this)
     }
 
     componentDidMount() {
@@ -103,8 +105,11 @@ export default class Cliente extends Component {
         console.log('btn edit - id: ' + id)
     }
 
-    handleClickRemove(id) {
-        console.log('btn remove - id: ' + id)
+    handleClickPrepareToDelete(idClient){
+        this.setState({...this.state, idPrepareToDelete: idClient})
+    }
+    handleClickConfirmRemove() {
+        console.log('btn remove - id: ' + this.state.idPrepareToDelete)
     }    
 
 
@@ -128,7 +133,8 @@ export default class Cliente extends Component {
                     // Functions
                     clientes={this.state.clientes}
                     handleClickEdit={this.handleClickEdit}
-                    handleClickRemove={this.handleClickRemove}
+                    handleClickPrepareToDelete={this.handleClickPrepareToDelete}
+                    handleClickConfirmRemove={this.handleClickConfirmRemove}
                 />
             </div>
         )

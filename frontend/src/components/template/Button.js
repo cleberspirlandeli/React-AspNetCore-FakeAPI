@@ -26,13 +26,18 @@
 import React from 'react'
 
 export default props => (
-    <button 
-        type="button" 
-        style={{ marginRight: '7px' }} 
+    <button
+        type="button"
+        style={{ marginRight: '7px' }}
         className={props.classBtn ? 'btn btn-labeled ' + props.classBtn : 'btn btn-labeled'}
         onClick={props.onClick}
-        >
-        <span className="btn-label"><i className={props.classIcon ? props.classIcon : 'fas fa-spinner'}></i></span>
+        data-dismiss={props.dataDismiss}
+        data-toggle={props.dataToggle}
+        data-target={props.dataTarget}
+    >
+        <span className="btn-label">
+            <i className={props.classIcon ? props.classIcon : 'fas fa-spinner'}></i>
+        </span>
         {props.nomeBtn ? props.nomeBtn : ''}
     </button>
 )

@@ -27,7 +27,7 @@ export default props => {
                             <small className="text-muted font-weight-bold">
                                 <p className="text-dark text-center">
                                     <i className="fas fa-search" style={{ marginRight: '8px' }}></i>
-                                    FILTROS PARA PESQUISAR DE CLIENTE</p>
+                                    FILTROS PARA PESQUISA DE CLIENTE</p>
                             </small>
                             <div className="row">
                                 <div className="form-group col-12 col-sm-4" style={{ marginTop: '5px' }}>

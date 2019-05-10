@@ -1,6 +1,7 @@
 import React from 'react'
 import './cliente.css'
 import Button from './../template/Button'
+import Modal from './../template/Modal'
 
 export default props => {
 
@@ -36,21 +37,48 @@ export default props => {
                         classBtn='btn-light'
                         classIcon='fas fa-pencil-alt'
                         nomeBtn='Editar'
-                        onClick={() => props.handleClickEdit(cliente.id)}>
-                    </Button>
+                        onClick={() => props.handleClickEdit(cliente.id)} />
 
                     <Button
                         classBtn='btn-danger'
                         classIcon='far fa-trash-alt'
                         nomeBtn='Remover'
-                        onClick={() => props.handleClickRemove(cliente.id)}/>
+                        onClick={() => props.handleClickPrepareToDelete(cliente.id)}
+                        dataToggle="modal"
+                        dataTarget="#modalConfirmDeleteClient"
+                    />
+
                 </td>
             </tr>
         ))
     }
 
     return (
+
         <div>
+            <Modal
+                // Modal Information
+                iconModal="fas fa-exclamation-triangle"
+                txtCabecalho="Atenção"
+                txtInformativo="Deseja remover permanentemente este cliente?"
+                txtExplicativo="O cliente será deletado definitivamente. É uma ida sem volta, você perderá para sempre essa informação."
+                // Button Cancel Information
+                btnClassCancel=""
+                btnIconCancel="far fa-times-circle"
+                btnNameCancel="Cancelar"
+                dataToggleBtnCancel="modal"
+                dataTargetBtnCancel="#modalConfirmDeleteClient"
+                onClickBtnCancel=""
+                // Button Confirm Information
+                btnClassConfirm="btn-danger"
+                btnIconConfirm="far fa-trash-alt"
+                btnNameConfirm="Remover"
+                dataToggleBtnConfirm="modal"
+                dataTargetBtnConfirm="#modalConfirmDeleteClient"
+                onClickBtnConfirm={() => props.handleClickConfirmRemove()}
+            />
+
+
             <table className='table-responsive-sm table-responsive-md col-12 table border rounded'>
                 <thead>
                     <tr>
