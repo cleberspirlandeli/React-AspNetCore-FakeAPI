@@ -37,7 +37,7 @@ export default props => {
                         classBtn='btn-light'
                         classIcon='fas fa-pencil-alt'
                         nomeBtn='Editar'
-                        onClick={() => props.handleClickEdit(cliente.id)} />
+                        onClick={() => props.handleClickEditClient(cliente.id)} />
 
                     <Button
                         classBtn='btn-danger'

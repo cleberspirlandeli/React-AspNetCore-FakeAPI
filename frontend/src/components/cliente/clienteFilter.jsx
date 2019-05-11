@@ -1,6 +1,9 @@
 import React from 'react'
 import './cliente.css'
-import Button from './../template/Button'
+import Button from '../template/Button'
+
+import { Link } from 'react-router-dom'
+
 
 export default props => {
     const errors = {}
@@ -61,11 +64,14 @@ export default props => {
                             </div>
                             <hr />
                             <div className="d-flex justify-content-end">
-                                <Button
-                                    classBtn='btn-primary'
-                                    classIcon='fas fa-user-plus'
-                                    nomeBtn='Novo Cliente'
-                                />
+                                <Link to='/clientes/cadastrar' >
+                                    <Button
+                                        classBtn='btn-primary'
+                                        classIcon='fas fa-user-plus'
+                                        nomeBtn='Novo Cliente'
+                                        onClick={()=> props.handleClickOpenForm(true, 'new')}
+                                    />
+                                </Link>
                             </div>
                         </form>
                     </div>

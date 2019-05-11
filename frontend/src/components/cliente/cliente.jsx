@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import ClienteList from './clienteList'
-import ClienteFiltro from './clienteFiltro'
+import ClienteFilter from './clienteFilter'
+import ClienteForm from './clienteForm'
+
+
+import Button from '../template/Button'
+
 
 const URL = 'http://localhost:3001/clientes'
 // const URL = 'http://localhost:3001/clientesid/'
@@ -13,6 +18,8 @@ export default class Cliente extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            openForm: false,
+            statusCliente: 'new',
             nome: '',
             telefone: '',
             cpf: '',
@@ -20,18 +27,35 @@ export default class Cliente extends Component {
             rua: '',
             bairro: '',
             idPrepareToDelete: null,
-            clientes: []
+            clientes: [],
+
+            testeState: 1
         }
 
         this.getClientes = this.getClientes.bind(this)
         this.handleChange = this.handleChange.bind(this)
-        this.handleClickEdit = this.handleClickEdit.bind(this)
-        this.handleClickConfirmRemove= this.handleClickConfirmRemove.bind(this)
+        this.handleClickEditClient = this.handleClickEditClient.bind(this)
+        this.handleClickConfirmRemove = this.handleClickConfirmRemove.bind(this)
         this.handleClickPrepareToDelete = this.handleClickPrepareToDelete.bind(this)
+        this.handleClickOpenForm = this.handleClickOpenForm.bind(this)
+
+
+
+        this.testeState = this.testeState.bind(this)
+    }
+
+    testeState(){
+    //     console.log('TESTE ')
+    //     console.log('Antes ' + this.state.testeState)
+    //     this.setState({ testeState : 2} , () => {
+    //     console.log('Depois ' + this.state.testeState)
+            console.log('Depois ')
+    //     })
     }
 
     componentDidMount() {
         this.getClientes()
+        // this.handleClickOpenForm(false, 'new')
     }
 
     handleChange(event) {
@@ -42,10 +66,9 @@ export default class Cliente extends Component {
         // console.log(value, name)
         this.setState({
             [name]: value
+        }, () => {
+            this.getClientes()
         });
-
-
-        this.getClientes()
     }
 
     getClientes() {
@@ -100,44 +123,76 @@ export default class Cliente extends Component {
             })
     }
 
-
-    handleClickEdit(id) {
-        console.log('btn edit - id: ' + id)
-    }
-
-    handleClickPrepareToDelete(idClient){
-        this.setState({...this.state, idPrepareToDelete: idClient})
+    handleClickPrepareToDelete(idClient) {
+        this.setState({ ...this.state, idPrepareToDelete: idClient })
     }
     handleClickConfirmRemove() {
         console.log('btn remove - id: ' + this.state.idPrepareToDelete)
-    }    
+    }
 
+    handleClickOpenForm(open, statusCliente) {
+        if (open) {
+            this.setState({ ...this.state, openForm: true, statusCliente: statusCliente }, () => {
+                this.props.history.push('/clientes/cadastrar')
+            })
+        } else {
+            this.setState({ ...this.state, openForm: false, statusCliente: 'new' }, () => {
+                this.props.history.push('/clientes')
+            })
+        }
+        console.log(this.state.openForm)
+    }
+
+    handleClickEditClient(id) {
+        let query = `id/`
+
+        axios.get(`${URL + query}`)
+            .then(res => {
+                this.setState({ clientes: res.data }, () => {
+                    this.handleClickOpenForm(true, 'edit')
+                })
+            })
+    }
 
     render() {
-        return (
-            <div>
-                <h4 style={{ marginTop: '10px', padding: '8px' }} className="text-center border rounded">CLIENTES</h4>
-                <ClienteFiltro
-                    nome={this.state.nome}
-                    telefone={this.state.telefone}
-                    cpf={this.state.cpf}
-                    cep={this.state.cep}
-                    rua={this.state.rua}
-                    bairro={this.state.bairro}
-                    // Functions
-                    handleChange={this.handleChange}
-                    getClientes={this.getClientes}
+        if (this.state.openForm) {
+            return (
+                <ClienteForm
+                    toRegister={this.state.openForm}
+                    cliente={this.state.clientes}
+                    statusCliente={this.statusCliente}
+
+                />
+            )
+        }
+        else {
+            return (
+                <div>                  
+                    <h4 style={{ marginTop: '10px', padding: '8px' }} className="text-center border rounded">CLIENTES</h4>
+                    <ClienteFilter
+                        nome={this.state.nome}
+                        telefone={this.state.telefone}
+                        cpf={this.state.cpf}
+                        cep={this.state.cep}
+                        rua={this.state.rua}
+                        bairro={this.state.bairro}
+                        // Functions
+                        handleChange={this.handleChange}
+                        getClientes={this.getClientes}
+                        handleClickOpenForm={this.handleClickOpenForm}
                     />
 
-                <ClienteList
-                    // Functions
-                    clientes={this.state.clientes}
-                    handleClickEdit={this.handleClickEdit}
-                    handleClickPrepareToDelete={this.handleClickPrepareToDelete}
-                    handleClickConfirmRemove={this.handleClickConfirmRemove}
-                />
-            </div>
-        )
+                    <ClienteList
+                        // Functions
+                        clientes={this.state.clientes}
+                        handleClickEditClient={this.handleClickEditClient}
+                        handleClickPrepareToDelete={this.handleClickPrepareToDelete}
+                        handleClickConfirmRemove={this.handleClickConfirmRemove}
+                    />
+                </div>
+            )
+        }
+
     }
 
 }

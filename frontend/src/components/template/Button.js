@@ -25,7 +25,8 @@
 
 import React from 'react'
 
-export default props => (
+// export default props => (
+const Button = (props) => (
     <button
         type="button"
         style={{ marginRight: '7px' }}
@@ -34,6 +35,7 @@ export default props => (
         data-dismiss={props.dataDismiss}
         data-toggle={props.dataToggle}
         data-target={props.dataTarget}
+        
     >
         <span className="btn-label">
             <i className={props.classIcon ? props.classIcon : 'fas fa-spinner'}></i>
@@ -41,3 +43,4 @@ export default props => (
         {props.nomeBtn ? props.nomeBtn : ''}
     </button>
 )
+export default Button

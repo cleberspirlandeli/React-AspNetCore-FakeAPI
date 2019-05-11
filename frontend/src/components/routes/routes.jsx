@@ -8,23 +8,12 @@ import Clientes from '../cliente/cliente'
 import Pedidos from '../pedidos/pedidos'
 // import ComponenteDePagina404 from '...'
 
-
-// export default props => (
-//     <BrowserRouter>
-//         <Switch>
-//             <Route exact path="/" exact={true} component={Clientes} />
-//             <Route path="/clientes" exact={true} component={Clientes} />
-//             <Route path="/pedidos" component={Pedidos} />
-//             {/* <Route path='*' component={ComponenteDePagina404} /> */}
-//         </Switch>
-//     </ BrowserRouter>
-// )
-
 const Routes = () => (
     <BrowserRouter>
         <Switch>
-            <Route exact path="/" component={Clientes} />
-            <Route path="/clientes" exact={true} component={Clientes} />
+            <Route exact path="/" component={Pedidos} />
+            <Route path="/clientes" component={Clientes} />
+            {/* <Route path="/clientes/cadastrar" exact={true} component={CadastrarCliente} /> */}
             <Route path="/pedidos" component={Pedidos} />
             <Route path='*' component={() => <h1>Page 404</h1>} />
         </Switch>
