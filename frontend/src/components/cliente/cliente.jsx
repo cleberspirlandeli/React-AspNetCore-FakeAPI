@@ -5,9 +5,6 @@ import ClienteFilter from './clienteFilter'
 import ClienteForm from './clienteForm'
 
 
-import Button from '../template/Button'
-
-
 const URL = 'http://localhost:3001/clientes'
 // const URL = 'http://localhost:3001/clientesid/'
 // http://localhost:3001/clientes//search?nome=Cleber%20Rezende&telefone=9999&cpf=123&cep=14050-100&rua=Rua%20Aurora&bairro=tiberio
@@ -39,23 +36,11 @@ export default class Cliente extends Component {
         this.handleClickPrepareToDelete = this.handleClickPrepareToDelete.bind(this)
         this.handleClickOpenForm = this.handleClickOpenForm.bind(this)
 
-
-
-        this.testeState = this.testeState.bind(this)
-    }
-
-    testeState(){
-    //     console.log('TESTE ')
-    //     console.log('Antes ' + this.state.testeState)
-    //     this.setState({ testeState : 2} , () => {
-    //     console.log('Depois ' + this.state.testeState)
-            console.log('Depois ')
-    //     })
     }
 
     componentDidMount() {
         this.getClientes()
-        // this.handleClickOpenForm(false, 'new')
+        this.handleClickOpenForm(false, 'new')
     }
 
     handleChange(event) {
@@ -130,17 +115,25 @@ export default class Cliente extends Component {
         console.log('btn remove - id: ' + this.state.idPrepareToDelete)
     }
 
-    handleClickOpenForm(open, statusCliente) {
+    handleClickOpenForm(open, status) {
+        console.log(status)
+
         if (open) {
-            this.setState({ ...this.state, openForm: true, statusCliente: statusCliente }, () => {
+            this.setState({
+                openForm: true,
+                statusCliente: this.status
+            }, () => {
                 this.props.history.push('/clientes/cadastrar')
             })
-        } else {
-            this.setState({ ...this.state, openForm: false, statusCliente: 'new' }, () => {
+        }
+         else {
+            this.setState({ 
+                openForm: false, 
+                statusCliente: 'new' 
+            }, () => {
                 this.props.history.push('/clientes')
             })
         }
-        console.log(this.state.openForm)
     }
 
     handleClickEditClient(id) {
@@ -155,42 +148,45 @@ export default class Cliente extends Component {
     }
 
     render() {
-        if (this.state.openForm) {
-            return (
-                <ClienteForm
-                    toRegister={this.state.openForm}
-                    cliente={this.state.clientes}
-                    statusCliente={this.statusCliente}
 
-                />
-            )
-        }
-        else {
-            return (
-                <div>                  
-                    <h4 style={{ marginTop: '10px', padding: '8px' }} className="text-center border rounded">CLIENTES</h4>
-                    <ClienteFilter
-                        nome={this.state.nome}
-                        telefone={this.state.telefone}
-                        cpf={this.state.cpf}
-                        cep={this.state.cep}
-                        rua={this.state.rua}
-                        bairro={this.state.bairro}
-                        // Functions
-                        handleChange={this.handleChange}
-                        getClientes={this.getClientes}
-                        handleClickOpenForm={this.handleClickOpenForm}
-                    />
+        switch (this.state.openForm) {
+            case true:
+                return (
+                    <ClienteForm
+                        toRegister={this.state.openForm}
+                        cliente={this.state.clientes}
+                        statusCliente={this.statusCliente}
 
-                    <ClienteList
-                        // Functions
-                        clientes={this.state.clientes}
-                        handleClickEditClient={this.handleClickEditClient}
-                        handleClickPrepareToDelete={this.handleClickPrepareToDelete}
-                        handleClickConfirmRemove={this.handleClickConfirmRemove}
                     />
-                </div>
-            )
+                );
+                break;
+            default:
+                return (
+                    <div>
+                        <h4 style={{ marginTop: '10px', padding: '8px' }} className="text-center border rounded">CLIENTES</h4>
+                        <ClienteFilter
+                            nome={this.state.nome}
+                            telefone={this.state.telefone}
+                            cpf={this.state.cpf}
+                            cep={this.state.cep}
+                            rua={this.state.rua}
+                            bairro={this.state.bairro}
+                            // Functions
+                            handleChange={this.handleChange}
+                            getClientes={this.getClientes}
+                            handleClickOpenForm={this.handleClickOpenForm}
+                        />
+
+                        <ClienteList
+                            // Functions
+                            clientes={this.state.clientes}
+                            handleClickEditClient={this.handleClickEditClient}
+                            handleClickPrepareToDelete={this.handleClickPrepareToDelete}
+                            handleClickConfirmRemove={this.handleClickConfirmRemove}
+                        />
+                    </div>
+                )
+                break;
         }
 
     }
