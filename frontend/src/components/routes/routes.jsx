@@ -6,14 +6,15 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 
 import Clientes from '../cliente/cliente'
 import Pedidos from '../pedidos/pedidos'
+import TesteForm from '../cliente/clienteForm'
 // import ComponenteDePagina404 from '...'
 
 const Routes = () => (
     <BrowserRouter>
         <Switch>
             <Route exact path="/" component={Pedidos} />
-            <Route path="/clientes" component={Clientes} />
-            {/* <Route path="/clientes/cadastrar" exact={true} component={CadastrarCliente} /> */}
+            {/* <Route path="/clientes" component={Clientes} /> */}
+            <Route path="/clientes" exact={true} component={TesteForm} />
             <Route path="/pedidos" component={Pedidos} />
             <Route path='*' component={() => <h1>Page 404</h1>} />
         </Switch>

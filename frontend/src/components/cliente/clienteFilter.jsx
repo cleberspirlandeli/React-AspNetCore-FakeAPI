@@ -69,7 +69,7 @@ export default props => {
                                         classBtn='btn-primary'
                                         classIcon='fas fa-user-plus'
                                         nomeBtn='Novo Cliente'
-                                        onClick={()=> props.handleClickOpenForm(true, 'new')}
+                                        onClick={() => props.handleClickOpenForm(true, 'new')}
                                     />
                                 </Link>
                             </div>
