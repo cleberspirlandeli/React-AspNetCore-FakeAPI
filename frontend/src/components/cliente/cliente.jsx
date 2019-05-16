@@ -17,16 +17,25 @@ export default class Cliente extends Component {
         this.state = {
             openForm: false,
             statusCliente: 'new',
-            nome: '',
-            telefone: '',
-            cpf: '',
-            cep: '',
-            rua: '',
-            bairro: '',
+
             idPrepareToDelete: null,
             clientes: [],
-
-            testeState: 1
+            clienteFilter: {
+                nome: '',
+                telefone: '',
+                cpf: '',
+                cep: '',
+                rua: '',
+                bairro: '',
+            },
+            clienteForm: {
+                nome: '',
+                telefone: '',
+                cpf: '',
+                cep: '',
+                rua: '',
+                bairro: '',
+            }
         }
 
         this.getClientes = this.getClientes.bind(this)
@@ -43,59 +52,73 @@ export default class Cliente extends Component {
         this.handleClickOpenForm(false, 'new')
     }
 
-    handleChange(event) {
+    handleChange(event, nameOfObj) {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
-
         // console.log(value, name)
-        this.setState({
-            [name]: value
-        }, () => {
-            this.getClientes()
-        });
+
+        //creating copy of object - clienteForm clienteFilter
+        let objCliente = nameOfObj === 'clienteFilter'
+            ? Object.assign({}, this.state.clienteFilter)
+            : Object.assign({}, this.state.clienteForm)
+
+        console.log(objCliente)
+
+        //updating value
+        objCliente[name] = value
+
+        // console.log(clienteFilter[name])
+        if (nameOfObj === 'clienteFilter') {
+            this.setState({ clienteFilter: objCliente }, () => {
+                this.getClientes()
+            });
+        } else {
+            this.setState({ clienteForm: objCliente });
+        }
     }
 
     getClientes() {
+        let clienteFilter = this.state.clienteFilter
         let query = ''
 
-        if (this.state.nome != '') {
-            query = `/search?nome=${this.state.nome.replace(/\s/g, '%20')}`
+        if (clienteFilter.nome != '') {
+            query = `/search?nome=${clienteFilter.nome.replace(/\s/g, '%20')}`
         }
 
-        if (this.state.telefone != '') {
+        if (clienteFilter.telefone != '') {
             if (query == '')
-                query = `/search?telefone=${this.state.telefone.replace(/\s/g, '%20')}`
+                query = `/search?telefone=${clienteFilter.telefone.replace(/\s/g, '%20')}`
             else
-                query += `&telefone=${this.state.telefone.replace(/\s/g, '%20')}`
+                query += `&telefone=${clienteFilter.telefone.replace(/\s/g, '%20')}`
         }
 
-        if (this.state.cpf != '') {
+        if (clienteFilter.cpf != '') {
             if (query == '')
-                query = `/search?cpf=${this.state.cpf.replace(/\s/g, '%20')}`
+                query = `/search?cpf=${clienteFilter.cpf.replace(/\s/g, '%20')}`
             else
-                query += `&cpf=${this.state.cpf.replace(/\s/g, '%20')}`
+                query += `&cpf=${clienteFilter.cpf.replace(/\s/g, '%20')}`
         }
 
-        if (this.state.cep != '') {
+        if (clienteFilter.cep != '') {
             if (query == '')
-                query = `/search?cep=${this.state.cep.replace(/\s/g, '%20')}`
+                query = `/search?cep=${clienteFilter.cep.replace(/\s/g, '%20')}`
             else
-                query += `&cep=${this.state.cep.replace(/\s/g, '%20')}`
+                query += `&cep=${clienteFilter.cep.replace(/\s/g, '%20')}`
         }
 
-        if (this.state.rua != '') {
+        if (clienteFilter.rua != '') {
             if (query == '')
-                query = `/search?rua=${this.state.rua.replace(/\s/g, '%20')}`
+                query = `/search?rua=${clienteFilter.rua.replace(/\s/g, '%20')}`
             else
-                query += `&rua=${this.state.rua.replace(/\s/g, '%20')}`
+                query += `&rua=${clienteFilter.rua.replace(/\s/g, '%20')}`
         }
 
-        if (this.state.bairro != '') {
+        if (clienteFilter.bairro != '') {
             if (query == '')
-                query = `/search?bairro=${this.state.bairro.replace(/\s/g, '%20')}`
+                query = `/search?bairro=${clienteFilter.bairro.replace(/\s/g, '%20')}`
             else
-                query += `&bairro=${this.state.bairro.replace(/\s/g, '%20')}`
+                query += `&bairro=${clienteFilter.bairro.replace(/\s/g, '%20')}`
         }
 
         // console.log(`${URL + query}`)
@@ -105,6 +128,7 @@ export default class Cliente extends Component {
             .then(res => {
                 this.setState({ ...this.state, clientes: res.data })
                 // console.log(res.data)
+                console.log('chamou axios')
             })
     }
 
@@ -126,10 +150,10 @@ export default class Cliente extends Component {
                 this.props.history.push('/clientes/cadastrar')
             })
         }
-         else {
-            this.setState({ 
-                openForm: false, 
-                statusCliente: 'new' 
+        else {
+            this.setState({
+                openForm: false,
+                statusCliente: 'new'
             }, () => {
                 this.props.history.push('/clientes')
             })
@@ -165,12 +189,7 @@ export default class Cliente extends Component {
                     <div>
                         <h4 style={{ marginTop: '10px', padding: '8px' }} className="text-center border rounded">CLIENTES</h4>
                         <ClienteFilter
-                            nome={this.state.nome}
-                            telefone={this.state.telefone}
-                            cpf={this.state.cpf}
-                            cep={this.state.cep}
-                            rua={this.state.rua}
-                            bairro={this.state.bairro}
+                            {...this.state.clienteFilter}
                             // Functions
                             handleChange={this.handleChange}
                             getClientes={this.getClientes}

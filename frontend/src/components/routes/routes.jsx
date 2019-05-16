@@ -13,8 +13,8 @@ const Routes = () => (
     <BrowserRouter>
         <Switch>
             <Route exact path="/" component={Pedidos} />
-            {/* <Route path="/clientes" component={Clientes} /> */}
-            <Route path="/clientes" exact={true} component={TesteForm} />
+            <Route path="/clientes" component={Clientes} />
+            {/* <Route path="/clientes" exact={true} component={TesteForm} /> */}
             <Route path="/pedidos" component={Pedidos} />
             <Route path='*' component={() => <h1>Page 404</h1>} />
         </Switch>

@@ -188,7 +188,7 @@ const ClienteForm = (props) => {
             </div>
             <div className="d-flex justify-content-end" style={{ marginTop: '10px' }}>
                 <Button
-                    classBtn='btn-danger'
+                    classBtn='btn-light'
                     classIcon='far fa-times-circle'
                     nomeBtn='Cancelar'
                     onClick={() => { }} />
