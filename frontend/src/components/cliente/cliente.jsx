@@ -3,7 +3,7 @@ import axios from 'axios'
 import ClienteList from './clienteList'
 import ClienteFilter from './clienteFilter'
 import ClienteForm from './clienteForm'
-
+import './cliente.css'
 
 const URL = 'http://localhost:3001/clientes'
 // const URL = 'http://localhost:3001/clientesid/'
@@ -17,8 +17,9 @@ export default class Cliente extends Component {
         this.state = {
             openForm: false,
             statusCliente: 'new',
-
+            isLoading: 0,
             idPrepareToDelete: null,
+
             clientes: [],
             clienteFilter: {
                 nome: '',
@@ -31,10 +32,17 @@ export default class Cliente extends Component {
             clienteForm: {
                 nome: '',
                 telefone: '',
+                whatsApp: '',
                 cpf: '',
+                email: '',
+                sexo: '',
+                dataNascimento: '',
                 cep: '',
                 rua: '',
+                numero: '',
                 bairro: '',
+                cidade: '',
+                complemento: '',
             }
         }
 
@@ -44,7 +52,7 @@ export default class Cliente extends Component {
         this.handleClickConfirmRemove = this.handleClickConfirmRemove.bind(this)
         this.handleClickPrepareToDelete = this.handleClickPrepareToDelete.bind(this)
         this.handleClickOpenForm = this.handleClickOpenForm.bind(this)
-
+        this.getCep = this.getCep.bind(this)
     }
 
     componentDidMount() {
@@ -56,14 +64,13 @@ export default class Cliente extends Component {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
-        // console.log(value, name)
+
+        console.log(value, name)
 
         //creating copy of object - clienteForm clienteFilter
         let objCliente = nameOfObj === 'clienteFilter'
             ? Object.assign({}, this.state.clienteFilter)
             : Object.assign({}, this.state.clienteForm)
-
-        console.log(objCliente)
 
         //updating value
         objCliente[name] = value
@@ -74,8 +81,34 @@ export default class Cliente extends Component {
                 this.getClientes()
             });
         } else {
-            this.setState({ clienteForm: objCliente });
+            this.setState({ clienteForm: objCliente }, () => {
+                if (name === 'cep' && value.length >= 8) {
+                    this.getCep(value)
+                }
+            });
         }
+    }
+
+    getCep(cep) {
+        this.setState({ isLoading: 100 })
+        cep = cep.replace('-', '')
+
+        axios.get(`https://viacep.com.br/ws/${cep}/json/`)
+            .then(res => {
+                this.setState({
+                    clienteForm: {
+                        cep: res.data.cep,
+                        bairro: res.data.bairro,
+                        rua: res.data.logradouro,
+                        cidade: res.data.localidade
+                    }
+                }, () => {
+                    this.setState({ isLoading: 0 })
+                })
+
+            }).catch(err => {
+                console.log('ERR Buscar CEP - ' + err)
+            })
     }
 
     getClientes() {
@@ -145,7 +178,7 @@ export default class Cliente extends Component {
         if (open) {
             this.setState({
                 openForm: true,
-                statusCliente: this.status
+                statusCliente: status
             }, () => {
                 this.props.history.push('/clientes/cadastrar')
             })
@@ -155,7 +188,7 @@ export default class Cliente extends Component {
                 openForm: false,
                 statusCliente: 'new'
             }, () => {
-                this.props.history.push('/clientes')
+                this.props.history.push('/clientes/listar')
             })
         }
     }
@@ -176,12 +209,19 @@ export default class Cliente extends Component {
         switch (this.state.openForm) {
             case true:
                 return (
-                    <ClienteForm
-                        toRegister={this.state.openForm}
-                        cliente={this.state.clientes}
-                        statusCliente={this.statusCliente}
+                    <div>
+                        <ClienteForm
+                            {...this.state.clienteForm}
+                            isLoading={this.state.isLoading}
+                            statusCliente={this.state.statusCliente}
+                            // Functions
+                            handleChange={this.handleChange}
+                            toRegister={this.state.openForm}
+                            cliente={this.state.clientes}
+                            statusCliente={this.statusCliente}
 
-                    />
+                        />
+                    </div>
                 );
                 break;
             default:

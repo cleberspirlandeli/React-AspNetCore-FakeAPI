@@ -10,7 +10,7 @@ export default props => {
 
         if (Object.keys(clientes).length === 0) {
             return (
-                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center" style={{ marginTop: '10px' }}>
                     <div className="alert alert-warning alert-dismissible fade show" role="alert">
                         <strong>Falha ao conectar com o servidor! </strong> <br />
                         Atualize a página ou tente novamente mais tarde.
@@ -45,7 +45,9 @@ export default props => {
                                             className="form-check-input"
                                             id="exampleCheck1"
                                         />
-                                        <label className="form-check-label" for="exampleCheck1">WhatsApp</label>
+                                        <label className="form-check-label" for="exampleCheck1">
+                                            <i class="fab fa-whatsapp"></i> WhatsApp
+                                        </label>
                                     </div>
                                     <div className="form-check">
                                         <input checked={cliente.email ? 'checked' : ''}
@@ -53,7 +55,9 @@ export default props => {
                                             className="form-check-input"
                                             id="exampleCheck2"
                                         />
-                                        <label className="form-check-label" for="exampleCheck2">E-mail</label>
+                                        <label className="form-check-label" for="exampleCheck2">
+                                            <i class="far fa-envelope"></i> Email
+                                        </label>
                                     </div>
 
                                 </td>

@@ -9,11 +9,12 @@ export default props => {
     const errors = {}
 
     return (
-        <div className='col-12 border rounded' style={{ cursor: 'pointer' }} data-toggle="collapse"
-        data-target="#collapseTwo">
-            <div>
+        <div className='col-12 border rounded' style={{ cursor: 'pointer' }} >
+            <div >
                 <div id="accordion">
-                    <div className="d-flex justify-content-end"
+                    <div className="d-flex justify-content-end" 
+                        data-toggle="collapse" 
+                        data-target="#collapseTwo"
                         style={{ marginTop: '6px' }}
                         id="headingTwo">
                         <button className="btn btn-outline-secondary"
@@ -37,7 +38,6 @@ export default props => {
                                 <div className="form-group col-12 col-sm-4" style={{ marginTop: '5px' }}>
                                     <input id="nome" name="nome" value={props.nome} onChange={(e) => props.handleChange(e, 'clienteFilter')} type="text" className="form-control" aria-describedby="nome" placeholder="Nome" />
                                     {errors.nome ? <small className="form-text text-muted"><p className=" text-danger">Aqui vai uma mensagem de erro</p></small> : ''}
-
                                 </div>
                                 <div className="form-group col-12 col-sm-4" style={{ marginTop: '5px' }}>
                                     <input id="telefone" name="telefone" value={props.telefone} onChange={(e) => props.handleChange(e, 'clienteFilter')} type="text" className="form-control" placeholder="Telefone" />
